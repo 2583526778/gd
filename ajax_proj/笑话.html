@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="div1">
+			笑话一: <span id="span1"></span>
+		</div>
+		<div id="div2">
+			笑话二:<span id="span2"></span>
+		</div>
+		<script src="js/jquery-3.4.1.js"></script>
+		<script type="text/javascript">
+			var div1=document.querySelector("#div1");
+			$.ajax({
+				type:"get",
+				url:"http://v.juhe.cn/joke/content/list.php?sort=&page=2&pagesize=2&time=1418816972&key=4f9c7cf0e605378860dd677f0da9d74f",
+				success:function(d){
+					// console.log(d)
+					$("#span1").html(d.result.data[0].content)
+					$("#span2").html(d.result.data[1].content)
+				},
+				dataType:"jsonp"
+			})
+		</script>
+	</body>
+</html>

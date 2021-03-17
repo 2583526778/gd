@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+	<style type="text/css">
+		ul{
+			padding: 0;
+			margin: 0;
+		}
+		li{
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<ul>
+			<li>
+				日期: <span id="span1"></span>年 
+					<span id="span2"></span>月 
+					<span id="span3"></span>日
+			</li>
+			<li>
+				农历: <span id="nl"></span>
+			</li>
+			<li>
+				<span id="xq"></span>
+			</li>
+			<li>
+				宜: <span id="yi"></span>
+			</li>
+			<li>
+				忌: <span id="ji"></span>
+			</li>
+		</ul>
+	</div>
+	
+	<script src="js/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+		$.ajax({
+			type:"get",
+			url:"http://v.juhe.cn/calendar/day?date=2021-3-15&key=f3407698eb45b716d7dc32f6c36968e9",
+			success:function(d){
+				console.log(d)
+				var n=d.result.data.date.substr(0,4)
+				var y=d.result.data.date.substr(5,1)
+				var r=d.result.data.date.substr(7)
+				$("#span1").html(n)
+				$("#span2").html(y)
+				$("#span3").html(r)
+				$("#xq").html(d.result.data.weekday)
+				$("#nl").html(d.result.data.lunarYear+d.result.data.lunar)
+				$("#yi").html(d.result.data.avoid)
+				$("#ji").html(d.result.data.suit)
+			},
+			dataType:"jsonp"
+		})
+	</script>
+</body>
+</html>
